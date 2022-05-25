@@ -4,20 +4,19 @@ import { IFormSimple } from '../../fw-interfaces/form/iFormSimple';
 import { Injectable } from '@angular/core';
 import { fwFormGroup } from 'src/app/frame-work/services/fw-custome/fw-form-group';
 import { fwFormControl } from 'src/app/frame-work/services/fw-custome/fw-form-control';
-import { BaseHttpApiService } from '../../operation-service.ts/base-service/base-http-api.service';
 import { HttpFormService } from '../../operation-service.ts/http-form.service';
-import { Employee } from 'src/app/frame-work/models/entities/employee';
 import { IBaseVm } from 'src/app/frame-work/models/entities/base-entity';
+
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class FormSimpleSevice extends BForm implements IFormSimple {
+
     private _infoPanel : fwFormGroup;
     private _fieldPanel : fwFormGroup;
-    public baseVm!: IBaseVm;
-
+    
     public get infoPanel() : fwFormGroup {
         return this._infoPanel;        
     }
@@ -38,10 +37,6 @@ export class FormSimpleSevice extends BForm implements IFormSimple {
         super();
         this._infoPanel = new fwFormGroup();
         this._fieldPanel = new fwFormGroup();
-    }
-
-    test(): void {
-        this.httpFormService.Insert(this.baseVm).subscribe()
     }
 
     setInfoPanel(aryFormCntrl: fwFormControl[], stylePnl: StylePanel): void {
@@ -72,14 +67,49 @@ export class FormSimpleSevice extends BForm implements IFormSimple {
     }
 
     override setToolbar(aryButtons: ToolbarButtons []): void {
-        this._fwForm.toolbarBtn = aryButtons
+        this._fwForm.toolbarBtn = aryButtons;
     }
 
-    override insert(fn: Function, callback: Function): void {
-        //
-        // فقط اجرا کننده یک تابع آبزرور
-        // فقط اجرا کننده یک تابع کال بک
-    };     
+    override insert(entity: IBaseVm, callback: Function): void {        
+        this.httpFormService.Insert(entity).subscribe(p => {
+            if (p) {
+                callback();
+            }
+        });
+    };
 
+    override update(entity: IBaseVm, callback: Function): void {
+        this.httpFormService.update(entity).subscribe(p => {
+            if(p) {
+                callback();
+            }
+        })
+    }
+
+    override delete(entity: IBaseVm, callback: Function): void {
+        this.httpFormService.Delete(entity.id).subscribe(p => {
+            if(p) {
+                callback();
+            }
+        })
+    }
+
+    override getList(): any {
+        this.httpFormService.getList().subscribe((p) => {
+            return p;
+        });
+    }
+
+    override getById(id: number): any {
+        this.httpFormService.getById(id).subscribe(p => {
+            return p;
+        })
+    }
+
+    override getByFilters(entity: IBaseVm): any {
+        this.httpFormService.getByFilters(entity).subscribe(p => {
+            return p;
+        })
+    }
 
 }

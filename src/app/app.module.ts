@@ -13,6 +13,8 @@ import { CoreModule } from './frame-work/core/core.module';
 // import { FormGeneratorService } from './services/formGeneratorService';
 
 import { ConfigService } from './frame-work/core/operation-service.ts/base-service/config.service';
+import { EmployessComponent } from './system-modules/base-info/employess/employess.component';
+import { UnitsComponent } from './system-modules/base-info/units/units.component';
 
 
 export function initializerFunction(configServcie: ConfigService) {
@@ -23,7 +25,10 @@ export function initializerFunction(configServcie: ConfigService) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    EmployessComponent,
+    UnitsComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -37,6 +42,7 @@ export function initializerFunction(configServcie: ConfigService) {
 
     CoreModule
   ],
+  
   providers: [
     {
       provide: APP_INITIALIZER,

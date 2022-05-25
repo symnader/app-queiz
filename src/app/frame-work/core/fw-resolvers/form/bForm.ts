@@ -1,3 +1,5 @@
+import { IBaseVm } from "src/app/frame-work/models/entities/base-entity";
+import { ErrorVm } from "src/app/frame-work/models/fw-Vm/error-vm";
 import { fwFormGroup } from "src/app/frame-work/services/fw-custome/fw-form-group";
 import { IPropertyFrm } from "../../fw-interfaces/form/iFormProperty";
 import { IToolbar } from "../../fw-interfaces/toolbar/iToolbar";
@@ -9,21 +11,20 @@ export class BForm implements IPropertyFrm, IToolbar {
     
     protected _fwForm : fwFormGroup;
     
-    setToolbar(aryButtons: ToolbarButtons []): void {};
-    setFormProperty(caption: string, displayTyp: DisplayType): void {};
+    setToolbar(aryButtons: ToolbarButtons []): void { };
+    setFormProperty(caption: string, displayTyp: DisplayType): void { };
+    
+    print(fn: Function): any { }
+    exportTo(fn: Function): any { };
+    importTo(fn: Function): any { };
+    exit(fn: Function): any { };
 
-    print(fn: Function): any {}
-    exportTo(fn: Function): any {};
-    importTo(fn: Function): any {};
-    exit(fn: Function): any {};
-
-    insert(fn: Function, callback: Function): void{};     
-    edit(fn: Function, callback: Function): void {}
-    delete(fn: Function, callback: Function): void {}
-    save(fn: Function, callback: Function): void {}
-    submit(fn: Function, callback: Function): void {}  
-
-    getList(fn: Function, callback: Function): any {}
-    getById(fn: Function, callback: Function): any {}
-    getByFilters(fn: Function, callback: Function): any {}    
+    insert(entity: IBaseVm, callback: Function): void {}
+    update(entity: IBaseVm, callback: Function): void {}
+    delete(entity: IBaseVm, callback: Function): void {}
+    submit(entity: IBaseVm, callback: Function): void {}
+    
+    getList(): IBaseVm [] { throw new ErrorVm(); }
+    getById(id: number): IBaseVm { throw new ErrorVm(); }
+    getByFilters(entity: IBaseVm): IBaseVm [] {throw new ErrorVm(); }
 }

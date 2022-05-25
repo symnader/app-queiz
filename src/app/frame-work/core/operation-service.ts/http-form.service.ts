@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { IBaseVm } from "../../models/entities/base-entity";
-import { Employee } from "../../models/entities/employee";
 import { BaseHttpApiService } from "./base-service/base-http-api.service";
 
 
 @Injectable({
     providedIn: 'root',
   })
-  export class HttpFormService {
+
+export class HttpFormService {
     constructor(private baseHttpApiService: BaseHttpApiService) {}
   
     public Insert(entity: IBaseVm): Observable<IBaseVm> {
@@ -26,7 +26,12 @@ import { BaseHttpApiService } from "./base-service/base-http-api.service";
     public getList(): Observable<IBaseVm[]> {
       return this.baseHttpApiService.getService<IBaseVm[]>('api address');
     }
-  }
-  
 
-  
+    public getById(entityId: number): Observable<IBaseVm[]> {
+      return this.baseHttpApiService.getService<IBaseVm[]>('api address' + entityId );
+    }
+
+    public getByFilters(entity: IBaseVm): Observable<IBaseVm[]> {
+      return this.baseHttpApiService.postService<IBaseVm[]>('api address', entity);
+    }
+}

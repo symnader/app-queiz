@@ -1,7 +1,8 @@
+import { IBaseVm } from "src/app/frame-work/models/entities/base-entity";
+
 export interface  ICommandOperation {    
-    insert(fn: Function, callback: Function): void;  
-    edit(fn: Function, callback: Function): void;
-    delete(fn: Function, callback: Function): void;
-    save(fn: Function, callback: Function): void;
-    submit(fn: Function, callback: Function): void;
+    insert(entity: IBaseVm, callback: Function): void;
+    update(entity: IBaseVm, callback: Function): void;
+    delete(entity: IBaseVm, callback: Function): void;
+    submit(entity: IBaseVm, callback: Function): void;
 } 

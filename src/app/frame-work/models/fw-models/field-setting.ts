@@ -1,3 +1,4 @@
+
 export class FieldSetting {
     constructor(name: string, parent: FieldParent, dType: FieldDataType, bindName: string, format: FieldFormat,
                 ctrlType: ControlType,  readOnly: boolean = false) {

@@ -1,5 +1,7 @@
+import { IBaseVm } from "src/app/frame-work/models/entities/base-entity";
+
 export interface IQueryOpr {
-    getList(fn: Function, callback: Function): any;  // refresh btn
-    getById(fn: Function, callback: Function): any;
-    getByFilters(fn: Function, callback: Function): any;
+    getList(): any;
+    getById(id: number): any;
+    getByFilters(entity: IBaseVm): any;
 } 
